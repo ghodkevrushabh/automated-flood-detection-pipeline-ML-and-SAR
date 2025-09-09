@@ -1,0 +1,7 @@
+requests
+rasterio
+scikit-learn
+pandas
+joblib
+GDAL
+tqdm
