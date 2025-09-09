@@ -1,0 +1,41 @@
+# This is the name of your automated workflow
+name: Flood Detection Pipeline
+
+# These are the triggers that start the workflow
+on:
+  # Allows you to run the workflow manually from the Actions tab on GitHub
+  workflow_dispatch:
+  # This is the schedule
+  schedule:
+    # Runs at 2:30 AM UTC, which is 8:00 AM in Indian Standard Time (IST)
+    - cron: '30 2 * * *'
+
+# This section defines the jobs to be run
+jobs:
+  build-and-run:
+    # Use a standard, free Ubuntu Linux machine
+    runs-on: ubuntu-latest
+
+    # These are the individual steps the machine will execute
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install System Dependencies for GDAL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin libgdal-dev
+
+      - name: Install Python Libraries from requirements.txt
+        run: pip install -r requirements.txt
+
+      - name: Run the Flood Detection Pipeline
+        env:
+          # This securely provides your password to the script
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python watcher.py
