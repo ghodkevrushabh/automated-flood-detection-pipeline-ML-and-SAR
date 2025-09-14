@@ -2,7 +2,10 @@
 name: Daily Flood Detector
 
 on:
+  # This is your "Run it Once" button for testing in the cloud
   workflow_dispatch:
+  
+  # This is your "Deploy it" schedule for automatic daily runs
   schedule:
     - cron: '30 1 * * *' # 7:00 AM IST
 
