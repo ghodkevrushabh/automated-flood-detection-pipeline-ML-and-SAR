@@ -6,6 +6,14 @@ An end-to-end, fully automated pipeline that leverages Sentinel-1 SAR satellite 
 
 ---
 
+## Problem Statement
+- The Jorhat district in Assam, India, is a highly flood-prone zone that experiences recurring flood crises, as seen in consecutive years like June 2022 and July 2023.
+- This frequent and severe flooding is caused by the swell of the massive Brahmaputra River and its tributaries during the monsoon season.
+- Rapid and accurate mapping of the flood extent is challenging for monitoring bodies, especially during the monsoon when cloud cover can obscure the view for traditional optical satellites.
+- Therefore, there is a critical need to create a machine learning workflow that can automatically detect floods using weather-independent satellite images (like Sentinel-1 SAR) to provide early warnings and timely information for disaster management.
+
+---
+
 ## Key Features
 
 - **Automated Daily Execution**: The pipeline automatically runs every morning at 7:00 AM IST, checking for new satellite imagery over a predefined Area of Interest (AOI).
