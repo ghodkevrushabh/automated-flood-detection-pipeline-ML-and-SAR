@@ -2,38 +2,45 @@
 name: Daily Flood Detector
 
 on:
-  # This is your "Run it Once" button for testing in the cloud
+  # This adds the "Run workflow" button for your one-time test run
   workflow_dispatch:
   
-  # This is your "Deploy it" schedule for automatic daily runs
+  # This is the automatic schedule for the daily deployment
   schedule:
-    - cron: '30 1 * * *' # 7:00 AM IST
+    # Runs at 01:30 UTC, which is 7:00 AM IST
+    - cron: '30 1 * * *'
 
 jobs:
   run-flood-detector:
+    # Use the efficient Ubuntu runner
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checks out your repository and downloads your large LFS files
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           lfs: true
 
+      # Step 2: Sets up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
           
+      # Step 3: Installs the GDAL library, which is required on Ubuntu
       - name: Install GDAL
         run: |
           sudo apt-get update
           sudo apt-get install -y gdal-bin libgdal-dev
 
+      # Step 4: Installs all your Python libraries from requirements.txt
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      # Step 5: Runs your pipeline script once from start to finish
       - name: Run Flood Detection Pipeline
         env:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
