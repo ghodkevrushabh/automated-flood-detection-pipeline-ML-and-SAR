@@ -1,6 +1,6 @@
 # Automated Flood Detection Pipeline with SAR Imagery & ML
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ghodkevrushabh/automated-flood-detection-pipeline-sar-ml/main.yml?branch=main&style=for-the-badge)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ghodkevrushabh/automated-flood-detection-pipeline-ML-and-SAR/main.yml?branch=main&style=for-the-badge)
 
 An end-to-end, fully automated pipeline that leverages Sentinel-1 SAR satellite imagery and a Random Forest machine learning model to detect and map flood inundation. The entire workflow is orchestrated with GitHub Actions for daily, hands-off execution and reporting.
 
