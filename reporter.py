@@ -13,8 +13,8 @@ def send_email_alert(status, prediction_map_path=None, error_message=None):
 
     # Securely gets the email password from an environment variable (GitHub Secret)
     password = os.environ.get('GMAIL_APP_PASSWORD')
-    sender_email = "your_email@gmail.com"  # Change this
-    receiver_email = "your_email@gmail.com" # Change this
+    sender_email = "ghodkevrushabh06@gmail.com"
+    receiver_email = "ghodkevrushabh06@gmail.com"
 
     if not password:
         print("FATAL: GMAIL_APP_PASSWORD environment variable not set.")
