@@ -1,44 +1,37 @@
 # .github/workflows/main.yml
-name: Daily Flood Detector (Windows)
+name: Daily Flood Detector
 
 on:
-  # This allows you to run the workflow manually from the Actions tab
   workflow_dispatch:
-  
-  # This schedules the workflow to run automatically
   schedule:
-    # Runs at 01:30 UTC every day, which is 7:00 AM IST
-    - cron: '30 1 * * *'
+    - cron: '30 1 * * *' # 7:00 AM IST
 
 jobs:
   run-flood-detector:
-    # --- THIS IS THE KEY CHANGE ---
-    # Use a Windows virtual machine
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checks out your repository code
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
-      # Step 2: Sets up the Python version
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          
+      - name: Install GDAL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin libgdal-dev
 
-      # Step 3: Install Python packages from your requirements.txt
-      # On Windows, pip installing rasterio and other geospatial libraries
-      # often pulls in the necessary GDAL components automatically.
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      # Step 4: Run the main watcher script
       - name: Run Flood Detection Pipeline
         env:
-          # This makes your secret available as an environment variable
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-        # Use 'python' instead of 'python3' which is standard on Windows
-        run: python watcher.py
+        run: python3 watcher.py
