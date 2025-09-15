@@ -1,5 +1,4 @@
 name: Flood Detection Pipeline
-
 on:
   workflow_dispatch:
   schedule:
@@ -8,10 +7,7 @@ on:
 
 jobs:
   build-and-run:
-    # --- THIS IS THE KEY CHANGE ---
-    # We are now using a standard Ubuntu Linux virtual machine
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository Code
         uses: actions/checkout@v4
